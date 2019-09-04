@@ -1,0 +1,63 @@
+﻿@model IEnumerable<LightHouse.Models.RequestData>
+<br /><br />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <h2 class="panel-title pull-left" style="margin-left:10px;">
+                <strong>Requests</strong>
+            </h2>
+            <button style="margin-right:10px" class="btn btn-primary pull-right">Back to Request</button>
+        </div>
+    </div>
+
+    @*Receive All Database Data From Controller And Display Those Data In Client Side*@
+
+    @if (Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="panel-body">
+                <table class="table table-striped table-responsive">
+                    <tbody>
+                        <tr>
+                            <th bgcolor ="#AED6F1">Patient Name: @item.PatiName </th>
+                            <th bgcolor ="#52BE80">Blood Group: @item.Bloodgroup.BloodName</th>
+                            <th>Date: @item.ReqDate</th>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th bgcolor ="#E6B0AA">Reason</th>
+                                            <th>District Name</th>
+                                            <th>Hospital/Address</th>
+                                            <th>Phone</th>
+                                        </tr>
+                                       
+                                        
+                                            <tr>
+                                                <th>@item.Reason</th>
+                                                <th>@item.District.DistrictName</th>
+                                                <th>@item.HospitalName</th>
+                                                <th>@item.DPhone</th>
+                                            </tr>
+                 
+                                    </tbody>
+                                </table>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="panel-body">
+            <h3 style="color:red;">Empty!</h3>
+        </div>
+
+    }
+</div>

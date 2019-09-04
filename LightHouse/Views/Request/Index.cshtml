@@ -1,0 +1,78 @@
+﻿@model LightHouse.Models.RequestMessage
+@{
+                /**/
+
+                ViewBag.Title = "Blood House";
+}
+<br />
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading ">
+                <div class="clearfix ">
+                    Blood Request--রক্তের জন্য রক্তদাতা খুঁজতে এইখানে পোস্ট করুন
+                </div>
+            </div>
+            @using (Html.BeginForm("Index", "Request", FormMethod.Post))
+            {
+                <table class="table table-bordered table-hover">
+
+                    <tr>
+                        <td><input type="hidden" id="R_Id" /></td>
+                    </tr>
+
+                    <tr class="table-primary">
+                        <td><font color="Black">Blood Group</font></td>
+                        <td>@Html.DropDownList("B_id", null, "---Select Blood Group---", new { @class = "form-controls B_id", id = "B_id" })</td>
+
+                    </tr>
+                    <tr>
+                        <td><font color="Black">Name</font></td>
+                        <td>
+                            @Html.EditorFor(model => model.PatiName, new { htmlAttributes = new { @class = "form-control" } })
+
+                        </td>
+                    </tr>
+                    <tr class="table-primary">
+                        <td><font color="Black">Blood Group</font></td>
+                        <td>@Html.DropDownList("DistrictId", null, "---Dist---", new { @class = "form-controls DistrictId", id = "DistrictId" })</td>
+
+                    </tr>
+
+
+                    <tr class="table-primary">
+
+
+                        <td><font color="Black">Amount of Blood</font></td>
+                        <td>@Html.EditorFor(model => model.Amountofblood, new { htmlAttributes = new { @class = "form-control" } })</td>
+
+                    </tr>
+                    <tr>
+                        <td><font color="Black">Hospital Info</font></td>
+
+                        <td>@Html.EditorFor(model => model.HospitalName, new { htmlAttributes = new { @class = "form-control" } })</td>
+
+
+                    </tr>
+                    <tr>
+                        <td><font color="Black">Reason</font></td>
+
+                        <td>@Html.EditorFor(model => model.Reason, new { htmlAttributes = new { @class = "form-control" } })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td><button type="submit" id="submit" value="Save" class="btn btn-danger">Save</button></td>
+                    </tr>
+                </table>
+            }
+            </div>
+    </div>
+    <p>
+        @Html.ActionLink("Request List", "List", null, new { @class = "btn btn-success pull-left btn-sm glyphicon glyphicon-menu-right" })
+    </p>
+</div>
+
+

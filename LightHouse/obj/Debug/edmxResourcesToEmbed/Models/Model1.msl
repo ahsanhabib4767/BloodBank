@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestEntities">
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="TestModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="SL" ColumnName="SL" />
+          <ScalarProperty Name="D_id" ColumnName="D_id" />
+          <ScalarProperty Name="Dusername" ColumnName="Dusername" />
+          <ScalarProperty Name="Dpassword" ColumnName="Dpassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRoles">
+      <EntityTypeMapping TypeName="TestModel.UserRole">
+        <MappingFragment StoreEntitySet="UserRole">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="D_id" ColumnName="D_id" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Donordatas">
+      <EntityTypeMapping TypeName="TestModel.Donordata">
+        <MappingFragment StoreEntitySet="Donordata">
+          <ScalarProperty Name="Dactive" ColumnName="Dactive" />
+          <ScalarProperty Name="DdonateDate" ColumnName="DdonateDate" />
+          <ScalarProperty Name="Bbloodgroup" ColumnName="Bbloodgroup" />
+          <ScalarProperty Name="Dthana" ColumnName="Dthana" />
+          <ScalarProperty Name="Daddress" ColumnName="Daddress" />
+          <ScalarProperty Name="Ddistrict" ColumnName="Ddistrict" />
+          <ScalarProperty Name="DPhone" ColumnName="DPhone" />
+          <ScalarProperty Name="Dpassword" ColumnName="Dpassword" />
+          <ScalarProperty Name="Dusername" ColumnName="Dusername" />
+          <ScalarProperty Name="Dname" ColumnName="Dname" />
+          <ScalarProperty Name="D_id" ColumnName="D_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bloodgroups">
+      <EntityTypeMapping TypeName="TestModel.Bloodgroup">
+        <MappingFragment StoreEntitySet="Bloodgroup">
+          <ScalarProperty Name="BloodName" ColumnName="BloodName" />
+          <ScalarProperty Name="B_id" ColumnName="B_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Districts">
+      <EntityTypeMapping TypeName="TestModel.District">
+        <MappingFragment StoreEntitySet="District">
+          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequestDatas">
+      <EntityTypeMapping TypeName="TestModel.RequestData">
+        <MappingFragment StoreEntitySet="RequestData">
+          <ScalarProperty Name="Dactive" ColumnName="Dactive" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="HospitalName" ColumnName="HospitalName" />
+          <ScalarProperty Name="ReqDate" ColumnName="ReqDate" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="DPhone" ColumnName="DPhone" />
+          <ScalarProperty Name="B_id" ColumnName="B_id" />
+          <ScalarProperty Name="Amountofblood" ColumnName="Amountofblood" />
+          <ScalarProperty Name="PatiName" ColumnName="PatiName" />
+          <ScalarProperty Name="R_id" ColumnName="R_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Thanas">
+      <EntityTypeMapping TypeName="TestModel.Thana">
+        <MappingFragment StoreEntitySet="Thana">
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="THanaName" ColumnName="THanaName" />
+          <ScalarProperty Name="ThanaID" ColumnName="ThanaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

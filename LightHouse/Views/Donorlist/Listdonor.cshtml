@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Search For Blood</h4>
+<hr />
+<div style="width:90%; margin:0 auto">
+    @* Search Area *@
+    <div class="jumbotron">
+        <table class="table table-striped table-responsive">
+            <tbody>
+                <tr>
+                    <th bgcolor="#52BE80">Address</th>
+                    <td><input type="text" id="txtEmployeeName" class="form-control" /></td>
+                    <th bgcolor="#52BE80">Blood Group</th>
+                    <td>
+                        <select id="ddCountry" style="width:200px" class="form-control">
+                            <option value="">All Groups</option>
+                            <option value="O+">O+</option>
+                            <option value="A+">A+</option>
+                            <option value="B+">B+</option>
+                        </select>
+                        @* Here I have made this select box with some static data for make this example simpler.
+                            You can fill it from database data *@
+                    </td>
+                    <td>
+                        <input type="button" value="Search" id="btnSearch" class="form-control btn-success" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @* jQuery DataTables *@
+    <div>
+        <table id="myTable" datatable [dtOptions]="dtOptions" class="display compact" font-color="black">
+
+            <thead>
+                <tr>
+                    <th>Adrress</th>
+                    <th>Donor Name</th>
+                    <th>Phone</th>
+                    <th>Blood Group</th>
+                    <th>Donate Date</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@* jQuery DataTables css *@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+@* jQuery *@
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //jQuery DataTables initialization
+            $('#myTable').DataTable({
+                "processing": true, // for show processing bar
+                "serverSide": true, // for process on server side
+                "orderMulti": false, // for disable multi column order
+                "dom": '<"top"i>rt<"bottom"lp><"clear">', // for hide default global search box // little confusion? don't worry I explained in the tutorial website
+                "ajax": {
+                    "url":"@Url.Action("LoadData", "Donorlist")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns" : [
+                        { "data": "Daddress", "name": "Daddress", "autoWidth": true }, //index 0
+                        { "data": "Dname", "name": "Dname", "autoWidth": true }, //index 1
+                        { "data": "DPhone", "name": "DPhone", "autoWidth": true },//index 2
+                        { "data": "Bbloodgroup", "name": "Bbloodgroup", "autoWidth": true },//index 3
+                        { "data": "DdonateDate", "name": "DdonateDate", "autoWidth": true },//index 4
+
+                    ]
+            });
+
+            //Apply Custom search on jQuery DataTables here
+            oTable = $('#myTable').DataTable();
+            $('#btnSearch').click(function () {
+                //Apply search for Address // DataTable column index 0
+                oTable.columns(0).search($('#txtEmployeeName').val().trim());
+                //Apply search for bloodgroup // DataTable column index 3
+                oTable.columns(3).search($('#ddCountry').val().trim());
+                //hit search on server
+                oTable.draw();
+            });
+        });
+    </script>
+}

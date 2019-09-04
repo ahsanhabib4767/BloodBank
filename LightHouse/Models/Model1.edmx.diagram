@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="301b33d26d9844038a1daf064700c715" Name="Diagram1">
+        <EntityTypeShape EntityType="TestModel.UserProfile" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestModel.UserRole" Width="1.5" PointX="2.625" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="TestModel.FK__UserRole__D_id__32E0915F" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TestModel.Donordata" Width="1.5" PointX="1" PointY="3" />
+        <EntityTypeShape EntityType="TestModel.Bloodgroup" Width="1.5" PointX="4.625" PointY="0.5" />
+        <EntityTypeShape EntityType="TestModel.District" Width="1.5" PointX="3.25" PointY="2.625" />
+        <EntityTypeShape EntityType="TestModel.RequestData" Width="1.5" PointX="6.875" PointY="0.5" />
+        <EntityTypeShape EntityType="TestModel.Thana" Width="1.5" PointX="5.125" PointY="2.25" />
+        <AssociationConnector Association="TestModel.fk_RequestData_Bloodgroup" />
+        <AssociationConnector Association="TestModel.FK__Thana__DistrictI__44FF419A" />
+        <AssociationConnector Association="TestModel.fk_RequestData_District" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

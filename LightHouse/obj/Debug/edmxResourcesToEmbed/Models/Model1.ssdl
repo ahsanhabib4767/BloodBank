@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bloodgroup">
+    <Key>
+      <PropertyRef Name="B_id" />
+    </Key>
+    <Property Name="B_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BloodName" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="DistrictName" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Donordata">
+    <Key>
+      <PropertyRef Name="D_id" />
+    </Key>
+    <Property Name="D_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dname" Type="varchar" MaxLength="50" />
+    <Property Name="Dusername" Type="varchar" MaxLength="50" />
+    <Property Name="Dpassword" Type="varchar" MaxLength="50" />
+    <Property Name="DPhone" Type="varchar" MaxLength="50" />
+    <Property Name="Ddistrict" Type="varchar" MaxLength="50" />
+    <Property Name="Daddress" Type="varchar" MaxLength="50" />
+    <Property Name="Dthana" Type="varchar" MaxLength="50" />
+    <Property Name="Bbloodgroup" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Dactive" Type="bit" />
+    <Property Name="DdonateDate" Type="date" />
+  </EntityType>
+  <EntityType Name="RequestData">
+    <Key>
+      <PropertyRef Name="R_id" />
+    </Key>
+    <Property Name="R_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PatiName" Type="varchar" MaxLength="50" />
+    <Property Name="Amountofblood" Type="varchar" MaxLength="50" />
+    <Property Name="B_id" Type="int" Nullable="false" />
+    <Property Name="DPhone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DistrictId" Type="int" />
+    <Property Name="ReqDate" Type="datetime" />
+    <Property Name="HospitalName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Reason" Type="varchar" MaxLength="50" />
+    <Property Name="Dactive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Thana">
+    <Key>
+      <PropertyRef Name="ThanaID" />
+    </Key>
+    <Property Name="ThanaID" Type="int" Nullable="false" />
+    <Property Name="THanaName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DistrictId" Type="int" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="D_id" />
+    </Key>
+    <Property Name="SL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="D_id" Type="int" Nullable="false" />
+    <Property Name="Dusername" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Dpassword" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="D_id" Type="int" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Thana__DistrictI__44FF419A">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Thana" Type="Self.Thana" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="Thana">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRole__D_id__32E0915F">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="D_id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="D_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_RequestData_Bloodgroup">
+    <End Role="Bloodgroup" Type="Self.Bloodgroup" Multiplicity="1" />
+    <End Role="RequestData" Type="Self.RequestData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bloodgroup">
+        <PropertyRef Name="B_id" />
+      </Principal>
+      <Dependent Role="RequestData">
+        <PropertyRef Name="B_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_RequestData_District">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="RequestData" Type="Self.RequestData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="RequestData">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestModelStoreContainer">
+    <EntitySet Name="Bloodgroup" EntityType="Self.Bloodgroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Donordata" EntityType="Self.Donordata" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequestData" EntityType="Self.RequestData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Thana" EntityType="Self.Thana" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Thana__DistrictI__44FF419A" Association="Self.FK__Thana__DistrictI__44FF419A">
+      <End Role="District" EntitySet="District" />
+      <End Role="Thana" EntitySet="Thana" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRole__D_id__32E0915F" Association="Self.FK__UserRole__D_id__32E0915F">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="UserRole" EntitySet="UserRole" />
+    </AssociationSet>
+    <AssociationSet Name="fk_RequestData_Bloodgroup" Association="Self.fk_RequestData_Bloodgroup">
+      <End Role="Bloodgroup" EntitySet="Bloodgroup" />
+      <End Role="RequestData" EntitySet="RequestData" />
+    </AssociationSet>
+    <AssociationSet Name="fk_RequestData_District" Association="Self.fk_RequestData_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="RequestData" EntitySet="RequestData" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

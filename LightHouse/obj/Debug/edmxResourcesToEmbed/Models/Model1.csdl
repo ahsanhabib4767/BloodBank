@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="D_id" />
+    </Key>
+    <Property Name="SL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="D_id" Type="Int32" Nullable="false" />
+    <Property Name="Dusername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserRole__D_id__32E0915F" FromRole="UserProfile" ToRole="UserRole" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="D_id" Type="Int32" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UserProfile" Relationship="Self.FK__UserRole__D_id__32E0915F" FromRole="UserRole" ToRole="UserProfile" />
+  </EntityType>
+  <Association Name="FK__UserRole__D_id__32E0915F">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+    <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="D_id" />
+      </Principal>
+      <Dependent Role="UserRole">
+        <PropertyRef Name="D_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+    <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+    <AssociationSet Name="FK__UserRole__D_id__32E0915F" Association="Self.FK__UserRole__D_id__32E0915F">
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+      <End Role="UserRole" EntitySet="UserRoles" />
+    </AssociationSet>
+    <EntitySet Name="Donordatas" EntityType="TestModel.Donordata" />
+    <EntitySet Name="Bloodgroups" EntityType="TestModel.Bloodgroup" />
+    <EntitySet Name="Districts" EntityType="TestModel.District" />
+    <EntitySet Name="RequestDatas" EntityType="TestModel.RequestData" />
+    <EntitySet Name="Thanas" EntityType="TestModel.Thana" />
+    <AssociationSet Name="fk_RequestData_Bloodgroup" Association="TestModel.fk_RequestData_Bloodgroup">
+      <End Role="Bloodgroup" EntitySet="Bloodgroups" />
+      <End Role="RequestData" EntitySet="RequestDatas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Thana__DistrictI__44FF419A" Association="TestModel.FK__Thana__DistrictI__44FF419A">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="Thana" EntitySet="Thanas" />
+    </AssociationSet>
+    <AssociationSet Name="fk_RequestData_District" Association="TestModel.fk_RequestData_District">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="RequestData" EntitySet="RequestDatas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Donordata">
+    <Key>
+      <PropertyRef Name="D_id" />
+    </Key>
+    <Property Name="D_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dusername" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dpassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Ddistrict" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Daddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dthana" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Bbloodgroup" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DdonateDate" Type="DateTime" Precision="0" />
+    <Property Name="Dactive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Bloodgroup">
+    <Key>
+      <PropertyRef Name="B_id" />
+    </Key>
+    <Property Name="B_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BloodName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="RequestDatas" Relationship="TestModel.fk_RequestData_Bloodgroup" FromRole="Bloodgroup" ToRole="RequestData" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="Int32" Nullable="false" />
+    <Property Name="DistrictName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Thanas" Relationship="TestModel.FK__Thana__DistrictI__44FF419A" FromRole="District" ToRole="Thana" />
+    <NavigationProperty Name="RequestDatas" Relationship="TestModel.fk_RequestData_District" FromRole="District" ToRole="RequestData" />
+  </EntityType>
+  <EntityType Name="RequestData">
+    <Key>
+      <PropertyRef Name="R_id" />
+    </Key>
+    <Property Name="R_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PatiName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Amountofblood" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="B_id" Type="Int32" Nullable="false" />
+    <Property Name="DPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DistrictId" Type="Int32" />
+    <Property Name="ReqDate" Type="DateTime" Precision="3" />
+    <Property Name="HospitalName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Reason" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Dactive" Type="Boolean" />
+    <NavigationProperty Name="Bloodgroup" Relationship="TestModel.fk_RequestData_Bloodgroup" FromRole="RequestData" ToRole="Bloodgroup" />
+    <NavigationProperty Name="District" Relationship="TestModel.fk_RequestData_District" FromRole="RequestData" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Thana">
+    <Key>
+      <PropertyRef Name="ThanaID" />
+    </Key>
+    <Property Name="ThanaID" Type="Int32" Nullable="false" />
+    <Property Name="THanaName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="DistrictId" Type="Int32" />
+    <NavigationProperty Name="District" Relationship="TestModel.FK__Thana__DistrictI__44FF419A" FromRole="Thana" ToRole="District" />
+  </EntityType>
+  <Association Name="fk_RequestData_Bloodgroup">
+    <End Type="TestModel.Bloodgroup" Role="Bloodgroup" Multiplicity="1" />
+    <End Type="TestModel.RequestData" Role="RequestData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bloodgroup">
+        <PropertyRef Name="B_id" />
+      </Principal>
+      <Dependent Role="RequestData">
+        <PropertyRef Name="B_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Thana__DistrictI__44FF419A">
+    <End Type="TestModel.District" Role="District" Multiplicity="0..1" />
+    <End Type="TestModel.Thana" Role="Thana" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="Thana">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_RequestData_District">
+    <End Type="TestModel.District" Role="District" Multiplicity="0..1" />
+    <End Type="TestModel.RequestData" Role="RequestData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="RequestData">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
